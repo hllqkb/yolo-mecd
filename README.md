@@ -2,6 +2,14 @@
 
 # YOLO-MECD
 
+A deep learning-based citrus detection system using YOLO11 architecture with enhanced attention mechanisms for accurate fruit detection and classification.
+
+> About dataset and split script
+>
+> Dataset:[robotic-vision-lab/CitDet-A-Benchmark-Dataset-For-Citrus-Fruit-Detection: CitDet: A benchmark dataset for citrus fruit detection.](https://github.com/robotic-vision-lab/CitDet-A-Benchmark-Dataset-For-Citrus-Fruit-Detection)
+>
+> Script: *prepare_yolo_dataset.py*  in root dir
+
 ## Language Selection / 语言选择
 
 Choose your preferred language for documentation:
@@ -56,8 +64,8 @@ Choose your preferred language for documentation:
 ### Installation / 安装
 ```bash
 # Clone repository / 克隆仓库
-git clone https://github.com/yourusername/citrus-detection-yolo11.git
-cd citrus-detection-yolo11
+git clone https://github.com/hllqkb/yolo-mecd.git
+cd yolo-mecd
 
 # Install dependencies / 安装依赖
 pip install -r requirements.txt
