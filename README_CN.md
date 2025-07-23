@@ -311,7 +311,7 @@ citrus-detection-yolo11/
    ```bash
    # 减少训练批次大小
    batch=2  # 而不是 batch=4
-
+   
    # 使用更小的图像尺寸
    imgsz=640  # 而不是 imgsz=1280
    ```
@@ -322,7 +322,7 @@ citrus-detection-yolo11/
    import os
    model_path = 'runs/detect/train15/weights/best.pt'
    print(f"模型存在: {os.path.exists(model_path)}")
-
+   
    # 检查模型完整性
    from ultralytics import YOLO
    try:
@@ -336,10 +336,10 @@ citrus-detection-yolo11/
    ```bash
    # 检查Streamlit安装
    streamlit --version
-
+   
    # 清除Streamlit缓存
    streamlit cache clear
-
+   
    # 以调试模式运行
    streamlit run citrus_detection_app.py --logger.level=debug
    ```
@@ -351,7 +351,7 @@ citrus-detection-yolo11/
    device = 'cuda' if torch.cuda.is_available() else 'cpu'
    model = YOLO('best.pt')
    results = model('image.jpg', device=device)
-
+   
    # 多图像批量处理
    results = model(['img1.jpg', 'img2.jpg', 'img3.jpg'])
    ```
@@ -422,7 +422,7 @@ model.export(format='tflite')  # 导出为TensorFlow Lite
 ## 联系方式
 
 如有问题、建议或合作：
-- 邮箱: your.email@example.com
+- 邮箱: hllqkb@gmail.com
 - GitHub Issues: 使用issue跟踪器报告bug和功能请求
 - 研究合作: 联系学术合作伙伴关系
 

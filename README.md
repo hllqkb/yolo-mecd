@@ -1,4 +1,6 @@
-# Citrus Detection System - YOLO-MECD
+
+
+# YOLO-MECD
 
 ## Language Selection / 语言选择
 
@@ -83,13 +85,11 @@ results[0].show()
 ## Support / 技术支持
 
 - **GitHub Issues**: Report bugs and request features / 报告bug和功能请求
-- **Email**: your.email@example.com
+- **Email**: hllqkb@gmail.com
 - **Documentation**: Comprehensive guides in both languages / 两种语言的完整指南
 
 ---
 
 ## License / 许可证
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-本项目基于MIT许可证 - 详见[LICENSE](LICENSE)文件。
+本项目基于None许可证 
