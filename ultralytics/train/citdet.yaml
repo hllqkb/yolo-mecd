@@ -1,0 +1,9 @@
+# citdet_hierarchy.yaml
+path: /home/hllqk/projects/yolo-mecd/ultralytics/datasets/dataverse_files/CitDet_YOLO_Split
+train: train/images
+val: val/images
+
+names: 
+  0: Fruit-Citrus-0GcP
+  1: Fruit_on_Ground
+  2: Fruit_on_Tree
