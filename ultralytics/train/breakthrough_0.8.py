@@ -1,6 +1,7 @@
 import sys
 from pathlib import Path
-
+from monai.utils import set_determinism
+set_determinism(seed=3407) # 3407 is all you need
 # Add the project root to the Python path
 project_root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(project_root))
@@ -22,7 +23,7 @@ breakthrough_config = {
     'data': '/home/hllqk/projects/yolo-mecd/ultralytics/train/citdet.yaml',  # 数据集配置文件路径
     
     # 训练参数
-    'epochs': 200,          # 训练总轮数(先减少轮数进行测试)
+    'epochs': 50,          # 训练总轮数(先减少轮数进行测试)
     'batch': 4,             # 批次大小(减小4以避免显存不足问题)
     'imgsz': 1280,          # 输入图像分辨率(使 P3、P4 和 P5 检测头对应的特征图尺寸分别达到 160×160、80×80 和 40×40，利于小目标检测)
     

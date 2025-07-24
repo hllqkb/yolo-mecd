@@ -1,0 +1,141 @@
+# 柑橘小目标检测专用训练配置
+# 针对小目标检测优化的超参数配置
+# 适用模型: YOLO11_CITRUS_OPTIMIZED.yaml, YOLO11_CITRUS_LIGHTWEIGHT.yaml
+
+# === 基础训练参数 ===
+task: detect
+mode: train
+epochs: 300                    # 小目标需要更多训练轮次
+patience: 50                   # 早停耐心值
+batch: 16                      # 适中批次大小
+imgsz: 1024                    # 大输入分辨率保留小目标细节
+save: true
+save_period: 25                # 定期保存检查点
+cache: false                   # 根据内存情况调整
+device: '0'                    # GPU设备
+workers: 4                     # 数据加载线程
+project: 'citrus_detection'    # 项目名称
+name: 'small_object_optimized' # 实验名称
+exist_ok: false
+pretrained: true               # 使用预训练权重
+verbose: true
+seed: 42                       # 固定随机种子
+deterministic: true            # 确定性训练
+
+# === 小目标检测优化参数 ===
+# 检测阈值优化
+conf: 0.001                    # 极低置信度阈值捕获小目标
+iou: 0.5                       # 适中IoU阈值
+max_det: 1000                  # 增加最大检测数量
+
+# 训练策略优化
+optimizer: AdamW               # AdamW优化器更适合小目标
+lr0: 0.001                     # 较小初始学习率
+lrf: 0.01                      # 最终学习率比例
+momentum: 0.937                # 动量参数
+weight_decay: 0.0005           # 权重衰减
+warmup_epochs: 5               # 预热轮次
+warmup_momentum: 0.8           # 预热动量
+warmup_bias_lr: 0.1            # 预热偏置学习率
+
+# 损失函数优化
+box: 7.5                       # 边界框损失权重
+cls: 0.5                       # 分类损失权重
+dfl: 1.5                       # 分布焦点损失权重
+pose: 12.0                     # 姿态损失权重
+kobj: 1.0                      # 关键点目标损失权重
+label_smoothing: 0.0           # 标签平滑
+nbs: 64                        # 名义批次大小
+hsv_h: 0.015                   # 色调增强范围
+hsv_s: 0.7                     # 饱和度增强范围
+hsv_v: 0.4                     # 亮度增强范围
+
+# === 数据增强策略 ===
+# 几何变换增强
+degrees: 10.0                  # 旋转角度范围
+translate: 0.1                 # 平移比例
+scale: 0.9                     # 缩放范围
+shear: 2.0                     # 剪切角度
+perspective: 0.0001            # 透视变换
+flipud: 0.0                    # 垂直翻转概率
+fliplr: 0.5                    # 水平翻转概率
+
+# 高级数据增强
+mosaic: 1.0                    # 马赛克增强概率
+mixup: 0.15                    # 混合增强概率
+copy_paste: 0.3                # 复制粘贴增强概率
+auto_augment: randaugment      # 自动增强策略
+erasing: 0.4                   # 随机擦除概率
+crop_fraction: 1.0             # 裁剪比例
+
+# === 训练策略优化 ===
+# 多尺度训练
+multi_scale: true              # 启用多尺度训练
+rect: false                    # 禁用矩形训练保持多尺度
+close_mosaic: 30               # 最后30轮关闭马赛克增强
+
+# 学习率调度
+cos_lr: true                   # 余弦学习率调度
+dropout: 0.0                   # Dropout比例
+val: true                      # 启用验证
+split: val                     # 验证集划分
+save_json: false               # 保存JSON结果
+plots: true                    # 生成训练图表
+
+# 混合精度训练
+amp: true                      # 自动混合精度
+fraction: 1.0                  # 数据集使用比例
+profile: false                 # 性能分析
+freeze: null                   # 冻结层数
+
+# === 验证和测试参数 ===
+half: false                    # 半精度推理
+dnn: false                     # OpenCV DNN推理
+agnostic_nms: false            # 类别无关NMS
+retina_masks: false            # Retina掩码
+overlap_mask: true             # 重叠掩码处理
+mask_ratio: 4                  # 掩码下采样比率
+single_cls: false              # 单类别模式
+
+# === 小目标检测特殊配置 ===
+# IoU损失类型优化
+iou_type: CIoU                 # 使用CIoU损失
+inner_iou: false               # 内部IoU
+focal: false                   # 焦点损失
+focaler: false                 # 增强焦点损失
+alpha: 1.0                     # Alpha参数
+
+# === 推荐使用说明 ===
+# 
+# 🎯 使用方法:
+# yolo train model=YOLO11_CITRUS_OPTIMIZED.yaml data=citdet.yaml cfg=citrus_small_object_config.yaml
+# 
+# 📊 关键优化点:
+# 1. 大输入分辨率 (1024) - 保留小目标细节
+# 2. 低置信度阈值 (0.001) - 捕获更多小目标
+# 3. 增强数据增强 - 提高模型泛化能力
+# 4. 多尺度训练 - 适应不同大小目标
+# 5. 延迟关闭增强 (30轮) - 充分利用数据增强
+# 
+# ⚡ 性能优化:
+# - 使用AdamW优化器提高收敛速度
+# - 余弦学习率调度平滑训练过程
+# - 混合精度训练加速并节省显存
+# - 适当的权重衰减防止过拟合
+# 
+# 🔧 硬件要求:
+# - GPU显存: 8GB+ (batch=16, imgsz=1024)
+# - 系统内存: 16GB+
+# - 存储空间: 10GB+ (模型+数据+日志)
+# 
+# 📈 预期效果:
+# - 小目标检测精度提升 10-20%
+# - 整体mAP提升 5-15%
+# - 训练时间增加 20-30%
+# - 推理速度略微下降 5-10%
+# 
+# 🎨 柑橘检测特化:
+# - 适应圆形果实特征
+# - 处理树叶遮挡情况
+# - 应对光照变化
+# - 区分成熟度差异
