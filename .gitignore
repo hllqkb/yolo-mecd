@@ -1,3 +1,7 @@
 runs/
 yolo-mecd/ultralytics/datasets/
 res/train15/
+ultralytics/train/test/
+ultralytics/train/train/
+*.pt
+ultralytics/train/valid/

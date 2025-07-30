@@ -23,7 +23,7 @@ breakthrough_config = {
     'data': '/home/hllqk/projects/yolo-mecd/ultralytics/train/citdet.yaml',  # 数据集配置文件路径
     
     # 训练参数
-    'epochs': 50,          # 训练总轮数(先减少轮数进行测试)
+    'epochs': 50,          # 训练总轮数(建议至少两百轮，目前训练是到两百轮后收敛)
     'batch': 4,             # 批次大小(减小4以避免显存不足问题)
     'imgsz': 1280,          # 输入图像分辨率(使 P3、P4 和 P5 检测头对应的特征图尺寸分别达到 160×160、80×80 和 40×40，利于小目标检测)
     
@@ -105,6 +105,8 @@ def train_breakthrough(resume_path=None):
     # 使用高级架构
     model = YOLO('/home/hllqk/projects/yolo-mecd/ultralytics/ultralytics/cfg/models/11/YOLO11_FINALLY.yaml').load('/home/hllqk/projects/yolo-mecd/ultralytics/yolo11s.pt')
     # model=  YOLO('/home/hllqk/projects/yolo-mecd/ultralytics/yolo11m.pt')
+    # 使用Yolo12l模型为基准
+    # model = YOLO('/home/hllqk/projects/yolo-mecd/ultralytics/ultralytics/cfg/models/11/YOLO11_FINALLY.yaml').load('/home/hllqk/projects/yolo-mecd/yolo12l.pt')
     if resume_path:
         breakthrough_config['resume'] = resume_path 
     # 开始训练

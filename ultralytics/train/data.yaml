@@ -1,0 +1,13 @@
+train: ./train/images
+val: ./valid/images
+test: ./test/images
+
+nc: 1
+names: ['objects']
+
+roboflow:
+  workspace: h-lmgha
+  project: my-first-project-ybqq9
+  version: 2
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/h-lmgha/my-first-project-ybqq9/dataset/2
