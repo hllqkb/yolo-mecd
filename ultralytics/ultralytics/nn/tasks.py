@@ -13,7 +13,8 @@ from ultralytics.nn.modules import EMA
 from ultralytics.nn.modules import ADown
 from ultralytics.nn.modules import CSPPC
 from ultralytics.nn.blocks import *
-
+from ultralytics.nn.modules.swin_model import PatchEmbed, SwinStage, PatchMerging  # 新增导入
+from ultralytics.nn.modules.SwinTransformerBlock import SwinBackbone
 from ultralytics.nn.modules import (
     AIFI,
     C1,
@@ -387,6 +388,8 @@ class DetectionModel(BaseModel):
             verbose (bool): Whether to display model information.
         """
         super().__init__()
+        self.SwimTransformerBlock = SwinBackbone  # for SwinTransformer backbone
+        
         self.yaml = cfg if isinstance(cfg, dict) else yaml_model_load(cfg)  # cfg dict
         if self.yaml["backbone"][0][2] == "Silence":
             LOGGER.warning(
@@ -1647,6 +1650,9 @@ def parse_model(d, ch, verbose=True):
             C2fCIB,
             A2C2f,
             CSPPC,
+            PatchEmbed,
+            SwinStage, 
+            PatchMerging
         }
     )
     repeat_modules = frozenset(  # modules with 'repeat' arguments
@@ -1666,7 +1672,10 @@ def parse_model(d, ch, verbose=True):
             C2fCIB,
             C2PSA,
             A2C2f,
-            CSPPC
+            CSPPC,
+            PatchEmbed,
+            SwinStage, 
+            PatchMerging
         }
     )
     for i, (f, n, m, args) in enumerate(d["backbone"] + d["head"]):  # from, number, module, args
