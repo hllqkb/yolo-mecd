@@ -13,6 +13,7 @@ from ultralytics.nn.modules import EMA
 from ultralytics.nn.modules import ADown
 from ultralytics.nn.modules import CSPPC
 from ultralytics.nn.blocks import *
+from ultralytics.nn.modules import CAFM
 from ultralytics.nn.modules.swin_model import PatchEmbed, SwinStage, PatchMerging  # 新增导入
 from ultralytics.nn.modules.SwinTransformerBlock import SwinBackbone
 from ultralytics.nn.modules import (
@@ -1650,6 +1651,7 @@ def parse_model(d, ch, verbose=True):
             C2fCIB,
             A2C2f,
             CSPPC,
+            CAFM,
             PatchEmbed,
             SwinStage, 
             PatchMerging
@@ -1673,6 +1675,7 @@ def parse_model(d, ch, verbose=True):
             C2PSA,
             A2C2f,
             CSPPC,
+            CAFM,
             PatchEmbed,
             SwinStage, 
             PatchMerging

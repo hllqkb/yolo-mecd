@@ -34,11 +34,6 @@ breakthrough_config = {
     'momentum': 0.937,      # SGD动量参数(帮助加速收敛)
     'weight_decay': 0.0005, # 权重衰减(L2正则化系数)
     
-    # 学习率预热设置
-    'warmup_epochs': 3,     # 学习率预热轮数(减少热身期)
-    'warmup_momentum': 0.8, # 预热阶段的动量值
-    'warmup_bias_lr': 0.1,  # 预热阶段的偏置学习率
-    
     # 损失函数权重
     'box': 7.5,             # 边界框回归损失权重(适中值)
     'cls': 0.5,             # 分类损失权重(平衡设置)
@@ -46,23 +41,6 @@ breakthrough_config = {
     
     # 数据增强 - 基础设置
     'augment': True,        # 启用数据增强
-    'mosaic': 0.5,          # 马赛克增强概率(标准50%)
-    'mixup': 0.0,           # 禁用mixup增强(避免复杂问题)
-    'copy_paste': 0.0,      # 禁用复制粘贴增强(避免潜在问题)
-    
-    # 几何变换增强
-    'degrees': 0.0,         # 图像旋转角度范围(禁用旋转保护小目标)
-    'translate': 0.02,      # 图像平移比例(极小值保持位置稳定)
-    'scale': 0.9,           # 图像缩放范围(0.9表示90%-100%缩放)
-    'shear': 0.0,           # 图像剪切变换(禁用)
-    'perspective': 0.0,     # 透视变换强度(禁用)
-    'flipud': 0.0,          # 上下翻转概率(禁用)
-    'fliplr': 0.5,          # 左右翻转概率(保持50%概率)
-    
-    # 颜色空间增强
-    'hsv_h': 0.005,         # 色调变化幅度(极小变化)
-    'hsv_s': 0.4,           # 饱和度变化幅度(适中)
-    'hsv_v': 0.2,           # 亮度变化幅度(适中)
     
     # 训练策略
     'device': 0,            # 使用GPU 0
@@ -73,33 +51,15 @@ breakthrough_config = {
     'patience': 50,         # 早停耐心轮数(50轮val无改善则停止)
     'amp': True,            # 启用自动混合精度训练
     'cache': False,         # 禁用数据集缓存(避免内存问题)
-    'multi_scale': False,   # 禁用多尺度训练(避免复杂性)
-    'rect': False,          # 禁用矩形训练
-    'cos_lr': False,        # 禁用余弦学习率调度(使用线性更稳定)
-    'label_smoothing': 0.0, # 禁用标签平滑
-    'nbs': 64,              # 名义批次大小(用于梯度累积)
-    
-    # 掩码相关参数(实例分割时使用)
-    'overlap_mask': True,   # 重叠掩码处理
-    'mask_ratio': 4,        # 掩码下采样比率
-    
     # 正则化
     'dropout': 0.0,         # 禁用dropout
-    
     # 验证与可视化
     'val': True,            # 启用验证
     'plots': True,          # 启用训练过程绘图
     'save_period': 25,      # 每25轮保存一次模型
     'verbose': True,        # 启用详细输出
-    
     # 检测参数(针对小目标优化)
     'conf': 0.0005,         # 置信度阈值(极低以检测更多目标)
-    'iou': 0.5,             # NMS的IoU阈值(较低以保留更多检测)
-    'max_det': 1000,        # 每张图像最大检测数(大幅增加)
-    
-    # 高级增强技巧
-    'erasing': 0.0,         # 禁用随机擦除增强
-    'crop_fraction': 1.0,   # 图像裁剪比例(1.0表示不裁剪)
 }
 def train_breakthrough(resume_path=None):
     # 使用高级架构

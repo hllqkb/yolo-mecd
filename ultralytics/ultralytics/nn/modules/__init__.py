@@ -102,6 +102,7 @@ from .transformer import (
     TransformerLayer,
 )
 from .CSPPC import CSPPC
+from .CAFM import CAFM
 from .EMA import EMA
 
 __all__ = (
@@ -183,4 +184,5 @@ __all__ = (
     "A2C2f",
     "CSPPC", # added CSPPC
     "EMA", # added EMA
+    "CAFM"# added CAFM
 )
